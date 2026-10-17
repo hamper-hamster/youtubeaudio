@@ -214,9 +214,9 @@ def downloadaudio():
     status.config(text = "Downloading...", fg = "blue")
     def rundownload():
         if usingdefault: 
-            download = {'format': 'bestaudio/best','outtmpl': f'{filelocation}/%(title)s.%(ext)s', 'ffmpeg_location': ffmpegpath,'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality':'192', }, {'key':'FFmpegMetadata'}]}
+            download = {'format': 'bestaudio[ext=m4a]/bestaudio/best','outtmpl': f'{filelocation}/%(title)s.%(ext)s', 'ffmpeg_location': ffmpegpath,'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality':'320', }, {'key':'FFmpegMetadata'}]}
         else:   
-            download = {'format': 'bestaudio/best','outtmpl': f'{filelocation}/{ytname}.%(ext)s', 'ffmpeg_location': ffmpegpath,'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality':'192', }, {'key':'FFmpegMetadata'}], 'postprocessor_args':['-metadata', f'artist={ytartist}','-metadata', f'title={ytname}']}
+            download = {'format': 'bestaudio[ext=m4a]/bestaudio/best','outtmpl': f'{filelocation}/{ytname}.%(ext)s', 'ffmpeg_location': ffmpegpath,'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality':'320', }, {'key':'FFmpegMetadata'}], 'postprocessor_args':['-metadata', f'artist={ytartist}','-metadata', f'title={ytname}']}
         try:
             with yt_dlp.YoutubeDL(download) as dl:
                 dl.download([ytlink])
@@ -253,7 +253,7 @@ def downloadplaylist():
     status.config(text = "Starting...", fg = "blue")
     def rundownload():
         download = {
-            'format': 'bestaudio/best', 'outtmpl': f'{filelocation}/%(playlist_title)s/%(title)s.%(ext)s', 'ffmpeg_location':ffmpegpath, 'windowsfilenames': True, 'ignoreerrors': True, 'progress_hooks': [progresshook], 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}, {'key': 'FFmpegMetadata'}]}
+            'format': 'bestaudio[ext=m4a]/bestaudio/best', 'outtmpl': f'{filelocation}/%(playlist_title)s/%(title)s.%(ext)s', 'ffmpeg_location':ffmpegpath, 'windowsfilenames': True, 'ignoreerrors': True, 'progress_hooks': [progresshook], 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '320'}, {'key': 'FFmpegMetadata'}]}
         try:
             with yt_dlp.YoutubeDL(download) as dl:
                 dl.download([ytlink])
